@@ -1,7 +1,5 @@
 # USTC-nCoV-Report
-中国科学技术大学健康打卡平台 (<https://weixine.ustc.edu.cn/2020/login>) 每日信息自动上报
-
-本项目可以为多个人实现定时打卡功能, 只需将个人信息填入 `report.ini` 文件即可.
+中国科学技术大学健康打卡平台 (<https://weixine.ustc.edu.cn/2020/login>) 每日信息自动上报, 本项目可以同时为多个人实现定时打卡功能, 只需将每个人的信息填入 `report.ini` 文件即可.
 
 ## 内容列表
 
