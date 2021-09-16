@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import time
 import random
 import requests
@@ -34,8 +35,11 @@ def post_report(student):
     report.post_report(student.report)
 
 def main():
+    module_dir = os.path.dirname(os.path.abspath(__file__))
+    report_path = os.path.join(module_dir, 'report.ini')
+    
     config = configparser.ConfigParser()
-    config.read('report.ini', encoding='utf-8')
+    config.read(report_path, encoding='utf-8')
     
     students = []                                                                                  # 可以根据配置文件同时为多人填写疫情打卡
     for section in config.sections():
