@@ -1,6 +1,9 @@
 # USTC-nCoV-Report
 中国科学技术大学健康打卡平台 (<https://weixine.ustc.edu.cn/2020/login>) 每日信息自动上报, 本项目可以同时为多个人实现定时打卡功能, 只需将每个人的信息填入 `report.ini` 文件即可.
 
+2022年3月19日 修改report.ini以适应上报内容变化
+2021年9月13日 第一版
+
 ## 内容列表
 
 - [背景](#背景)
@@ -15,7 +18,7 @@
 
 ## 安装
 
-本项目需要Python 3.7或更高版本.
+本项目需要Python 3.7或更高版本, 低版本未作测试.
 
 安装 requests 库:
 
@@ -52,6 +55,9 @@ $ python3 main.py
 # 所有留空的选项, 不需要, 也不应填写
 # 在此文件中增加若干 section, 可为多个人实现自动化打卡操作
 
+# 修改记录:
+# 2022年3月19日 增加 “现居地” 选项
+
 [Tom]
 
 # 用户名及学号
@@ -60,47 +66,19 @@ password = 1234567
 
 _token = 
 
-# 当前所在地
-# 1 内地
-# 2 香港
-# 3 国外
-# 4 澳门
-# 5 台湾
-now_address = 1
-gps_now_address = 
-
-# 当前所在省份行政区划代码（不是邮编）
-# 其它地区可参考 http://www.mca.gov.cn/article/sj/xzqh/1980/
-# 江苏省 320000
-# 安徽省 340000
-now_province = 340000
-gps_province = 
-
-# 当前所在城市行政区划代码
-# 苏州市 320500
-# 合肥市 340100
-now_city = 340100
-gps_city = 
-
-# 当前所在区级行政区代码
-# 吴中区 320506
-# 蜀山区 340104
-# 包河区 340111
-now_country = 340104
-gps_country = 
-now_detail = 
-
-# 如果在合肥市，需填写此项，否则忽略即可
-# 0 校外
-# 2 东区
-# 3 南区
-# 4 中区
-# 5 北区
-# 6 西区
-# 7 先研院
-# 8 国金远
-# 9 其它校区
-is_inschool = 6
+# 现居地
+# 该项直接填写中文字符串即可，如：
+# 东校区
+# 西校区
+# 南校区
+# 北校区
+# 中校区
+# 高新校区
+# 先研院
+# 国金院
+# 合肥市内校外
+# 合肥市外校区
+juzhudi = 西校区
 
 # 当前身体状况
 # 1 正常
@@ -162,16 +140,8 @@ username = SA210000001
 password = 1234567
 
 _token = 
-now_address = 1
-gps_now_address = 
-now_province = 340000
-gps_province = 
-now_city = 340100
-gps_city = 
-now_country = 340104
-gps_country = 
-now_detail = 
-is_inschool = 6
+
+juzhudi = 西校区
 body_condition = 1
 body_condition_detail = 
 now_status = 1
