@@ -16,8 +16,6 @@ class Student(object):
         self.username = self.config.pop('username')
         self.password = self.config.pop('password')
         
-        if self.config['now_city'] != '340100':                                                    # 如在合肥, 需额外提交校区信息，详见前端 frontend.js 文件
-            self.config.pop('is_inschool')
         self.report = self.config
 
 def post_report(student):
