@@ -1,7 +1,13 @@
 # USTC-nCoV-Report
+
 中国科学技术大学健康打卡平台 (<https://weixine.ustc.edu.cn/2020/login>) 每日信息自动上报, 本项目可以同时为多个人实现定时打卡功能, 只需将每个人的信息填入 `report.ini` 文件即可.
 
 ## 更新日志
+
+**2022年3月31日**
+
+再次修改 `report.ini` 以适应上报内容变化.
+
 **2022年3月19日**
 
 修改 `report.ini` 以适应上报内容变化, 近期可能会增加每日自动提交出校申请报备功能.
@@ -12,11 +18,15 @@
 
 ## 内容列表
 
-- [背景](#背景)
-- [安装](#安装)
-- [使用说明](#使用说明)
-- [示例](#示例)
-- [使用许可](#使用许可)
+- [USTC-nCoV-Report](#ustc-ncov-report)
+  - [更新日志](#更新日志)
+  - [内容列表](#内容列表)
+  - [背景](#背景)
+  - [安装](#安装)
+  - [使用说明](#使用说明)
+  - [示例](#示例)
+  - [上报内容变化导致失败的解决办法](#上报内容变化导致失败的解决办法)
+  - [使用许可](#使用许可)
 
 ## 背景
 
@@ -29,13 +39,13 @@
 安装 requests 库:
 
 ```sh
-$ python3 -m pip install requests
+python3 -m pip install requests
 ```
 
 安装 BeautifulSoup 库:
 
 ```sh
-$ python3 -m pip install beautifulsoup4
+python3 -m pip install beautifulsoup4
 ```
 
 ## 使用说明
@@ -43,7 +53,7 @@ $ python3 -m pip install beautifulsoup4
 在目录下的 `report.ini` 文件夹下填入一个或多个人的信息, 然后执行:
 
 ```sh
-$ python3 main.py
+python3 main.py
 ```
 
 即可完成一次批量上报, 可以挂在服务器上使用 crontab 完成每日定时打卡, 如在每天早晨七点定时打卡:
@@ -63,7 +73,8 @@ $ python3 main.py
 # 任一 section 的标题(如 "tom")均可随便填
 
 # 修改记录:
-# 2022年3月19日 增加 “现居地” 选项
+# 2022年3月19日 增加  "现居地"  选项
+# 2022年3月31日 针对在校状态, 增加  "具体宿舍"  选项
 
 [Tom]
 
@@ -74,7 +85,7 @@ password = 1234567
 _token = 
 
 # 现居地
-# 该项直接填写中文字符串即可，如：
+# 该项直接填写中文字符串即可, 如：
 # 东校区
 # 西校区
 # 南校区
@@ -86,6 +97,11 @@ _token =
 # 合肥市内校外
 # 合肥市外校区
 juzhudi = 西校区
+
+# 2022年3月31日更新
+# 如实填写即可, 若处于不在校状态, 注释以下两行内容
+dorm_building = 1号楼
+dorm = 101
 
 # 当前身体状况
 # 1 正常
@@ -134,7 +150,7 @@ jinji_lxr = Jack
 jinji_guanxi = 父亲
 
 # 紧急联系人电话
-# jiji 不是我写错，实际 post 的数据就是这样
+# jiji 不是我写错, 实际 post 的数据就是这样
 jiji_mobile = 13500000000
 
 # 其它情况说明
@@ -149,6 +165,8 @@ password = 1234567
 _token = 
 
 juzhudi = 西校区
+dorm_building = 1号楼
+dorm = 101
 body_condition = 1
 body_condition_detail = 
 now_status = 1
@@ -164,6 +182,24 @@ jinji_guanxi = 儿子
 jiji_mobile = 13500000001
 other_detail = 无
 ```
+
+## 上报内容变化导致失败的解决办法
+
+由于学校近期报表内容频繁变化. 如果发现上报内容变化导致上报失败, 可以直接开 issue 提醒我修改, 也可以自行修改 `report.ini` 文件.
+
+这里简单讲一下如何找出正确的 `report.ini` 文件.
+
+1. 浏览器打开[中国科大健康打卡平台](https://weixine.ustc.edu.cn/2020/home), 登录进入 "信息上报" 页面;
+
+2. 打开浏览器的开发者模式（Chrome直接在页面空白处右键, 再点击 "检查" 即可）, 然后切换到 "网络" 选项卡;
+
+3. 填写信息, 点击页面上的 "确认上报" 按钮;
+
+4. 在 DevTools 中找到 `daily_report` 文件, 查看 "载荷" ;
+
+5. 将信息填入 `report.ini` 文件.
+
+![images](images/devtools.png)
 
 ## 使用许可
 
